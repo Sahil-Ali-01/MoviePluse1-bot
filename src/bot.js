@@ -7,6 +7,13 @@ const { getMoviesFromSheet } = require("./services/googleSheet");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
+// Temporary logging for chat IDs (remove after getting private group ID)
+bot.on('message', (ctx) => {
+  if (ctx.chat.type === 'group' || ctx.chat.type === 'supergroup' || ctx.chat.type === 'channel') {
+    console.log(`Chat ID: ${ctx.chat.id}, Title: ${ctx.chat.title}, Type: ${ctx.chat.type}, Username: ${ctx.chat.username}`);
+  }
+});
+
 /* =========================
    USER COMMANDS
    ========================= */
@@ -75,15 +82,16 @@ bot.action(/^download_(.+)_(.+)/, async (ctx) => {
 
   // Check subscription to both channels
   const REQUIRED_CHANNELS = [
-    { username: '@movieplusehindi', link: 'https://t.me/movieplusehindi', name: 'MoviePluse Hindi' },
-    { username: '@movieplusehindi', link: 'https://t.me/+4hLpchjjlVJkNDdl', name: 'Private Group' }
+    { type: 'username', value: '@movieplusehindi', link: 'https://t.me/movieplusehindi', name: 'MoviePluse Hindi' },
+    { type: 'chatId', value: process.env.PRIVATE_GROUP_ID, link: 'https://t.me/+4hLpchjjlVJkNDdl', name: 'Private Group' }
   ];
 
   let unsubscribedChannels = [];
 
   for (const channel of REQUIRED_CHANNELS) {
     try {
-      const member = await ctx.telegram.getChatMember(channel.username, ctx.from.id);
+      const chatIdentifier = channel.value;
+      const member = await ctx.telegram.getChatMember(chatIdentifier, ctx.from.id);
       if (member.status === 'left' || member.status === 'kicked') {
         unsubscribedChannels.push(channel);
       }

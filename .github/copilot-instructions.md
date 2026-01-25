@@ -34,6 +34,6 @@ This is a Node.js Telegram bot using Telegraf that serves movie download links f
 
 ## Dependencies
 - `telegraf`: Bot framework
-- `dotenv`: Environment variables (BOT_TOKEN, ADMIN_ID, GOOGLE_SHEET_ID, PORT)
+- `dotenv`: Environment variables (BOT_TOKEN, ADMIN_ID, GOOGLE_SHEET_ID, PORT, PRIVATE_GROUP_ID)
 
 Focus on Telegraf patterns, Google Sheets integration, and Telegram inline keyboards for movie quality selection.
