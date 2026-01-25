@@ -11,7 +11,7 @@ module.exports = async (ctx) => {
     return ctx.reply(
       "🎬 Welcome to MoviePluse Bot\n\n" +
       "📢 Movies are posted in our channel.\n" +
-      "👉 Click any movie link there to download.\n\n" +
+      "👉 Click any movie link🤖 there to download.\n\n" +
       "Channel: @movieplusehindi"
     );
   }
