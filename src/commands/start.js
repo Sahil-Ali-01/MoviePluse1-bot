@@ -52,7 +52,7 @@ module.exports = async (ctx) => {
 
   // ✅ MOVIE FOUND
   return ctx.reply(
-    `🎬 ${movie.title}\n\nSelect quality 👇`,
-    { reply_markup: movieKeyboard(movie.links) }
+    `🎬 ${movie.title}\n\nSelect quality 👇\n\n⚠️ Links may expire. If a link doesn't work, check the channel for updates.`,
+    { reply_markup: movieKeyboard(movie.links, movie.key, movie.sizes) }
   );
 };

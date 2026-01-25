@@ -39,14 +39,19 @@ module.exports.getMoviesFromSheet = async () => {
     );
 
   const movies = rows
-    .filter(r => r.length >= 6 && r[0])
-    .map(([key, title, p480, p720, p1080, status]) => ({
+    .filter(r => r.length >= 9 && r[0])
+    .map(([key, title, p480, p720, p1080, p480_size, p720_size, p1080_size, status]) => ({
       key,
       title,
       links: {
         "480p": p480,
         "720p": p720,
         "1080p": p1080,
+      },
+      sizes: {
+        "480p": p480_size,
+        "720p": p720_size,
+        "1080p": p1080_size,
       },
       status,
     }));

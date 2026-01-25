@@ -29,7 +29,7 @@ module.exports = async (ctx) => {
     .join("\n\n");
 
   return ctx.reply(
-    `🔥 *Latest Movies*\n\n${message}`,
-    { parse_mode: "Markdown" }
+    `🔥 <b>Latest Movies</b>\n\n${message}`,
+    { parse_mode: "HTML" }
   );
 };

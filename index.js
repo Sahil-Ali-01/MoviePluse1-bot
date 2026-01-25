@@ -1,4 +1,9 @@
-require("dotenv").config();
+require("dotenv").config({
+  path: process.env.DOTENV_CONFIG_PATH || ".env"
+});
+
+
+// require("dotenv").config();
 const http = require("http");
 
 // 🔴 REQUIRED FOR RENDER FREE WEB SERVICE
