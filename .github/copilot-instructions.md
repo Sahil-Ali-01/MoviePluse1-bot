@@ -19,6 +19,7 @@ This is a Node.js Telegram bot using Telegraf that serves movie download links f
 - **Admin Check**: Compare `ctx.from.id` with `process.env.ADMIN_ID` as string
 - **Movie Payloads**: Encode movie keys with `Buffer.from(key).toString("base64url")` for start links
 - **Cache Management**: Use `clearCache()` for admin refresh, data cached 60 seconds
+- **Subscription Check**: Verify user is member of `@movieplusehindi` and `@specialoffer12` before allowing downloads
 
 ## Project Conventions
 - **Movie Status**: Only "active" (case-insensitive) movies are shown

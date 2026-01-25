@@ -7,15 +7,6 @@ const { getMoviesFromSheet } = require("./services/googleSheet");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-// Temporary logging for chat IDs (remove after getting private group ID)
-bot.on('message', async (ctx) => {
-  if ((ctx.chat.type === 'group' || ctx.chat.type === 'supergroup' || ctx.chat.type === 'channel') && ctx.from.id.toString() === process.env.ADMIN_ID) {
-    // Send chat ID to admin
-    await ctx.reply(`Chat Info:\nID: ${ctx.chat.id}\nTitle: ${ctx.chat.title}\nType: ${ctx.chat.type}\nUsername: ${ctx.chat.username || 'None (private)'}`);
-    console.log(`Chat ID: ${ctx.chat.id}, Title: ${ctx.chat.title}, Type: ${ctx.chat.type}, Username: ${ctx.chat.username}`);
-  }
-});
-
 /* =========================
    USER COMMANDS
    ========================= */
@@ -24,22 +15,28 @@ bot.command("start", startCommand);
 bot.command("help", (ctx) => {
   ctx.reply(
     "🆘 How to Download Movies\n\n" +
-    "1️⃣ Join our channel 👇\n" +
+    "1️⃣ Join our channels 👇\n" +
     "2️⃣ Click any movie post\n" +
     "3️⃣ Choose video quality\n\n" +
     "⚠️ If a movie is unavailable, check the channel for new posts.",
     {
       reply_markup: {
-        inline_keyboard: [[{ text: "Subscribe to Channel", url: "https://t.me/+4hLpchjjlVJkNDdl" }]]
+        inline_keyboard: [
+          [{ text: "MoviePluse Hindi", url: "https://t.me/movieplusehindi" }],
+          [{ text: "Special Offers", url: "https://t.me/specialoffer12" }]
+        ]
       }
     }
   );
 });
 
 bot.command("channel", (ctx) => {
-  ctx.reply("📢 Movie Channel", {
+  ctx.reply("📢 Our Channels", {
     reply_markup: {
-      inline_keyboard: [[{ text: "Join Channel", url: "https://t.me/+4hLpchjjlVJkNDdl" }]]
+      inline_keyboard: [
+        [{ text: "MoviePluse Hindi", url: "https://t.me/movieplusehindi" }],
+        [{ text: "Special Offers", url: "https://t.me/specialoffer12" }]
+      ]
     }
   });
 });
@@ -85,7 +82,7 @@ bot.action(/^download_(.+)_(.+)/, async (ctx) => {
   // Check subscription to both channels
   const REQUIRED_CHANNELS = [
     { type: 'username', value: '@movieplusehindi', link: 'https://t.me/movieplusehindi', name: 'MoviePluse Hindi' },
-    { type: 'chatId', value: process.env.PRIVATE_GROUP_ID, link: 'https://t.me/+4hLpchjjlVJkNDdl', name: 'Private Group' }
+    { type: 'username', value: '@specialoffer12', link: 'https://t.me/specialoffer12', name: 'Special Offers' }
   ];
 
   let unsubscribedChannels = [];
@@ -108,7 +105,7 @@ bot.action(/^download_(.+)_(.+)/, async (ctx) => {
       [{ text: `Subscribe to ${channel.name}`, url: channel.link }]
     );
     
-    ctx.reply("📢 Please subscribe to all channels first to access downloads:", {
+    ctx.reply("📢 Please subscribe to our channels first to access downloads:", {
       reply_markup: {
         inline_keyboard: keyboard
       }
