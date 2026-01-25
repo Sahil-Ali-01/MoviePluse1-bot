@@ -8,8 +8,10 @@ const { getMoviesFromSheet } = require("./services/googleSheet");
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 // Temporary logging for chat IDs (remove after getting private group ID)
-bot.on('message', (ctx) => {
-  if (ctx.chat.type === 'group' || ctx.chat.type === 'supergroup' || ctx.chat.type === 'channel') {
+bot.on('message', async (ctx) => {
+  if ((ctx.chat.type === 'group' || ctx.chat.type === 'supergroup' || ctx.chat.type === 'channel') && ctx.from.id.toString() === process.env.ADMIN_ID) {
+    // Send chat ID to admin
+    await ctx.reply(`Chat Info:\nID: ${ctx.chat.id}\nTitle: ${ctx.chat.title}\nType: ${ctx.chat.type}\nUsername: ${ctx.chat.username || 'None (private)'}`);
     console.log(`Chat ID: ${ctx.chat.id}, Title: ${ctx.chat.title}, Type: ${ctx.chat.type}, Username: ${ctx.chat.username}`);
   }
 });
