@@ -20,5 +20,3 @@ http.createServer((req, res) => {
 // START TELEGRAM BOT
 // =========================
 require("./src/bot");
-
-require("./src/bot");
