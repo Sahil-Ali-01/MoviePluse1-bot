@@ -1,4 +1,4 @@
-const { getMoviesFromSheet } = require("../services/googleSheet");
+const { getMovies } = require("../services/mongodb");
 const { movieKeyboard } = require("../utils/keyboard");
 
 module.exports = async (ctx) => {
@@ -16,7 +16,7 @@ module.exports = async (ctx) => {
     );
   }
 
-  const movies = await getMoviesFromSheet();
+  const movies = await getMovies();
 
   const movie = movies.find(
     (m) => m.key === payload && m.status === "active"

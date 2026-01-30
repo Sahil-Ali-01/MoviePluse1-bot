@@ -1,9 +1,10 @@
 require("dotenv").config();
 const { Telegraf } = require("telegraf");
 
+const { connectDB } = require("./services/db");
 const startCommand = require("./commands/start");
 const adminCommand = require("./commands/admin");
-const { getMoviesFromSheet } = require("./services/googleSheet");
+const { getMovies } = require("./services/mongodb");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -47,6 +48,9 @@ bot.command("latest", require("./commands/latest"));
    ADMIN COMMAND HANDLERS
    ========================= */
 bot.command("admin", adminCommand);
+bot.command("addmovie", adminCommand);
+bot.command("deletemovie", adminCommand);
+bot.command("listmovies", adminCommand);
 bot.command("checkmovie", adminCommand);
 bot.command("refreshcache", adminCommand);
 
@@ -63,7 +67,7 @@ bot.action(/^download_(.+)_(.+)/, async (ctx) => {
   const movieKey = ctx.match[1];
   const quality = ctx.match[2];
 
-  const movies = await getMoviesFromSheet();
+  const movies = await getMovies();
   const movie = movies.find(m => m.key === movieKey && m.status === "active");
 
   if (!movie) {
@@ -101,10 +105,10 @@ bot.action(/^download_(.+)_(.+)/, async (ctx) => {
 
   // If user is not subscribed to all channels
   if (unsubscribedChannels.length > 0) {
-    const keyboard = unsubscribedChannels.map(channel => 
+    const keyboard = unsubscribedChannels.map(channel =>
       [{ text: `Subscribe to ${channel.name}`, url: channel.link }]
     );
-    
+
     ctx.reply("📢 Please subscribe to our channels first to access downloads:", {
       reply_markup: {
         inline_keyboard: keyboard
@@ -151,8 +155,17 @@ bot.telegram.setMyCommands([
 /* =========================
    START BOT
    ========================= */
-bot.launch();
-console.log("🤖 Bot running (Google Sheet only)");
+(async () => {
+  try {
+    await connectDB();
+    await bot.launch();
+    console.log("🤖 Bot running (MongoDB)");
+  } catch (err) {
+    console.error("❌ Failed to start bot:", err);
+    process.exit(1);
+  }
+})();
 
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
+

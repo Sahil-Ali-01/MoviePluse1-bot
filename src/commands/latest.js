@@ -1,4 +1,4 @@
-const { getMoviesFromSheet } = require("../services/googleSheet");
+const { getMovies } = require("../services/mongodb");
 
 module.exports = async (ctx) => {
   const LIMIT = 5;
@@ -6,7 +6,7 @@ module.exports = async (ctx) => {
   // ✅ SAFE: ctx exists here
   const BOT_USERNAME = ctx.botInfo.username;
 
-  const movies = await getMoviesFromSheet();
+  const movies = await getMovies();
 
   // Only active movies
   const activeMovies = movies.filter(
