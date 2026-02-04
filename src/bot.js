@@ -23,7 +23,7 @@ bot.command("help", (ctx) => {
     {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "MoviePluse Hindi", url: "https://t.me/movieplusehindi" }],
+          [{ text: "Movie Pluse", url: "https://t.me/moviepluse189" }],
           [{ text: "Special Offers", url: "https://t.me/specialoffer12" }]
         ]
       }
@@ -35,7 +35,7 @@ bot.command("channel", (ctx) => {
   ctx.reply("📢 Our Channels", {
     reply_markup: {
       inline_keyboard: [
-        [{ text: "MoviePluse Hindi", url: "https://t.me/movieplusehindi" }],
+        [{ text: "Movie Pluse", url: "https://t.me/moviepluse189" }],
         [{ text: "Special Offers", url: "https://t.me/specialoffer12" }]
       ]
     }
@@ -85,7 +85,7 @@ bot.action(/^download_(.+)_(.+)/, async (ctx) => {
 
   // Check subscription to both channels
   const REQUIRED_CHANNELS = [
-    { type: 'username', value: '@movieplusehindi', link: 'https://t.me/movieplusehindi', name: 'MoviePluse Hindi' },
+    { type: 'username', value: '@moviepluse189', link: 'https://t.me/moviepluse189', name: 'Movie Pluse' },
     { type: 'username', value: '@specialoffer12', link: 'https://t.me/specialoffer12', name: 'Special Offers' }
   ];
 

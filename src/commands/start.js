@@ -12,7 +12,7 @@ module.exports = async (ctx) => {
       "🎬 Welcome to MoviePluse Bot\n\n" +
       "📢 Movies are posted in our channel.\n" +
       "👉 Click any movie link🤖 there to download.\n\n" +
-      "Channel: @movieplusehindi"
+      "Channel: @moviepluseh189"
     );
   }
 
@@ -44,7 +44,7 @@ module.exports = async (ctx) => {
     return ctx.reply(text.trim(), {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "📢 Open Movie Channel", url: "https://t.me/movieplusehindi" }]
+          [{ text: "📢 Open Movie Channel", url: "https://t.me/moviepluse189" }]
         ]
       }
     });

@@ -3,7 +3,7 @@
 A Telegram bot for sharing and downloading movies with multiple quality options. Powered by MongoDB Atlas.
 
 [![Bot](https://img.shields.io/badge/Telegram-Bot-blue?logo=telegram)](https://t.me/moviepluse1bot)
-[![Channel](https://img.shields.io/badge/Channel-MoviePluse-blue?logo=telegram)](https://t.me/movieplusehindi)
+[![Channel](https://img.shields.io/badge/Channel-MoviePluse-blue?logo=telegram)](https://t.me/moviepluse189)
 
 ## ✨ Features
 
@@ -131,7 +131,7 @@ npm start
 
 ## 📢 Channels
 
-- **MoviePluse Hindi**: [@movieplusehindi](https://t.me/movieplusehindi)
+- **Movie Pluse**: [@moviepluse189](https://t.me/moviepluse189)
 - **Special Offers**: [@specialoffer12](https://t.me/specialoffer12)
 
 ---
